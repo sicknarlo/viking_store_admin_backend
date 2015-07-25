@@ -1,56 +1,4 @@
-<div class = "row">
-  <div class = "col-sm-12 text-center">
-    <h1>Viking Store Admin Portal</h1>
-  </div>
-</div>
-<hr>
-
-<div class = "row">
-  <div class = "col-sm-3">
-
-    <h4 class = "text-center">Navigation Options</h4>
-
-    <div class = "row">
-      <div class = "col-sm-12">
-        <%= link_to 'Users' %>
-      </div>
-    </div>
-
-    <div class = "row">
-      <div class = "col-sm-12">
-       <%= link_to 'Addresses' %>
-      </div>
-    </div>
-
-    <div class = "row">
-      <div class = "col-sm-12">
-        <%= link_to 'Orders' %>
-      </div>
-    </div>
-
-    <div class = "row">
-      <div class = "col-sm-12">
-        <%= link_to 'Products' %>
-      </div>
-    </div>
-
-    <div class = "row">
-      <div class = "col-sm-12">
-        <%= link_to 'Categories' %>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class = "row">
-      <div class = "col-sm-12 text-center">
-        <%= link_to 'Analytics Dashboard', dashboard_index_path %>
-      </div>
-    </div>
-
-  </div>
-
-
+<%= render partial: 'shared/admin_nav' %>
 
   <div class = "col-sm-9 text-center">
 
@@ -58,9 +6,11 @@
 
     <div class = "row">
       <div class = "col-sm-12">
-        <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
-              content_tag(:strong, 'Create New User!')
-        end %>
+        <%= link_to new_user_path do %>
+          <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+                content_tag(:strong, 'Create New User!')
+          end %>
+        <% end -%>
       </div>
     </div>
 

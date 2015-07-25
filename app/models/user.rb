@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
          .join_to_orders
          .where("orders.checkout_date IS NOT NULL AND users.id = ?", id)
          .count
-   end
+  end
 
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
         .where("users.id = ?", id)
         .first.city_name
   end
+
+  # Dashboard methods
 
   def self.in_last(days = nil)
     if days.nil?

@@ -1,0 +1,50 @@
+<%= render partial: 'shared/admin_nav' %>
+
+<div class = "col-sm-9 text-center">
+
+  <h2>Viking Store Products</h2>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <%= link_to new_product_path do %>
+        <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+              content_tag(:strong, 'Create New Product!')
+        end %>
+      <% end -%>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <table class="table table-hover table-striped">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Show</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          <% @products.each do |product| %>
+            <tr>
+              <td> <%= product.id %> </td>
+              <td> <%= product.name %> </td>
+              <td> <%= product.sku %> </td>
+              <td> <%= product.description %> </td>
+              <td> <%= number_to_currency(product.price) %> </td>
+              <td> <%= product.category_id %> </td>
+              <td> <%= link_to 'Show', product %> </td>
+              <td> <%= link_to 'Edit', edit_product_path(product) %> </td>
+              <td> <%= link_to 'Delete', product_path(product), method: :delete %> </td>
+            </tr>
+          <% end %>
+
+      </table>
+    </div>
+  </div>
+</div>

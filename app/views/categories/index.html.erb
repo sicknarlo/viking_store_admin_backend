@@ -1,0 +1,44 @@
+<%= render partial: 'shared/admin_nav' %>
+
+<div class = "col-sm-9 text-center">
+
+  <h2>Viking Store Categories</h2>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <%= link_to new_category_path do %>
+        <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+              content_tag(:strong, 'Create New Category!')
+        end %>
+      <% end -%>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <table class="table table-hover table-striped">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Show</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          <% @categories.each do |category| %>
+            <tr>
+              <td> <%= category.id %> </td>
+              <td> <%= category.name %> </td>
+              <td> <%= category.description %> </td>
+              <td> <%= link_to 'Show', category %> </td>
+              <td> <%= link_to 'Edit', edit_category_path(category) %> </td>
+              <td> <%= link_to 'Delete', category_path(category), method: :delete %> </td>
+            </tr>
+          <% end %>
+
+      </table>
+    </div>
+  </div>
+</div>
