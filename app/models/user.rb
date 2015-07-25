@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 
+  def self.full_name
+    self.select("users.first_name || ' ' || users.last_name AS full_name").find(self.id)
+  end
+
   def self.in_last(days = nil)
     if days.nil?
       self.count
