@@ -1,0 +1,106 @@
+<div class = "row">
+  <div class = "col-sm-12 text-center">
+    <h1>Viking Store Admin Portal</h1>
+  </div>
+</div>
+<hr>
+
+<div class = "row">
+  <div class = "col-sm-4">
+
+    <h4 class = "text-center">Navigation Options</h4>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <%= link_to 'Users' %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+       <%= link_to 'Addresses' %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <%= link_to 'Orders' %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <%= link_to 'Products' %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <%= link_to 'Categories' %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class = "row">
+      <div class = "col-sm-12 text-center">
+        <%= link_to 'Analytics Dashboard', dashboard_index_path %>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class = "col-sm-8 text-center">
+
+    <h2>Viking Store Users</h2>
+
+    <div class = "row">
+      <div class = "col-sm-8 col-sm-offset-2">
+        <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+              content_tag(:strong, 'Create New User!')
+        end %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <table class="table table-hover">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Joined</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Orders</th>
+              <th>Last Order</th>
+              <th>Show</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+            <% @users.each do |user| %>
+              <tr>
+                <td> <%= user.id %> </td>
+                <td> <%= user.full_name %> </td>
+                <td> <%= user.created_at %> </td>
+                <td> <%= user.city %> </td>
+                <td> <%= user.state %> </td>
+                <td> <%= user.total_orders %> </td>
+                <td> <%= user.last_order %> </td>
+                <td> <%= link_to 'Show', user %> </td>
+                <td> <%= link_to 'Edit', edit_user_path %> </td>
+                <td> <%= link_to 'Show', delete_user_path %> </td>
+              </tr>
+            <% end %>
+
+        </table>
+      </div>
+    </div>
+
+
+</div>
+
+
