@@ -1,11 +1,43 @@
 class User < ActiveRecord::Base
 
+  # Admin Portal methods
+
+  def last_order
+    query = User.select("orders.checkout_date AS checkout")
+                .join_to_orders
+                .where("orders.checkout_date IS NOT NULL AND users.id = ?", id)
+                .order("orders.checkout_date DESC")
+                .first
+    if query
+      query.checkout.to_date
+    else
+      "No Orders"
+    end
+  end
+
+  def total_orders
+    User.select("orders.id")
+         .join_to_orders
+         .where("orders.checkout_date IS NOT NULL AND users.id = ?", id)
+         .count
+   end
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
 
   def find_state_name
+    User.select("states.name AS state_name")
+    .join_to_states
+    .where("users.id = ?", id)
+    .first.state_name
+  end
 
+  def find_city_name
+    User.select("cities.name AS city_name")
+        .join_to_cities
+        .where("users.id = ?", id)
+        .first.city_name
   end
 
   def self.in_last(days = nil)
