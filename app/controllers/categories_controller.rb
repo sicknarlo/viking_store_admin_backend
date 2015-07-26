@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 
   def index
-    @categories = Category.all
+    @categories = Category.order(:id => :asc)
   end
 
   def show
@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(whitelisted_params)
     if @category.save
       flash[:success] = "New Category Created"
-      redirect_to @category
+      redirect_to categories_path
     else
       flash[:error] = "Failed to Create New Category"
       render :new
@@ -29,9 +29,9 @@ class CategoriesController < ApplicationController
 
   def update
     @category = Category.find(params[:id])
-    if @Category.update
+    if @category.update(whitelisted_params)
       flash[:success] = "Category Updated"
-      redirect_to @category
+      redirect_to categories_path
     else
       flash[:error] = "Failed to Update Category"
       render :edit
@@ -42,7 +42,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.destroy
       flash[:success] = "category Deleted"
-      redirect_to index
+      redirect_to categories_path
     else
       flash[:error] = "Failed to Delete Category"
       render :edit
