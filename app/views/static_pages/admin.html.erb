@@ -42,7 +42,8 @@
                 <td> <%= user.last_order %> </td>
                 <td> <%= link_to 'Show', user %> </td>
                 <td> <%= link_to 'Edit', edit_user_path(user) %> </td>
-                <td> <%= link_to 'Delete', user_path(user), method: :delete %> </td>
+                <td> <%= link_to 'Delete', user_path(user), method: :delete, class: "alert-danger", 
+                        data: { confirm: "Are you sure?" } %> </td>
               </tr>
             <% end %>
 

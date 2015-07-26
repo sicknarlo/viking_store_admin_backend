@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
       flash[:success] = "New Category Created"
       redirect_to categories_path
     else
-      flash[:error] = "Failed to Create New Category"
+      flash[:error] = @category.errors.full_messages.first
       render :new
     end
   end
@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
       flash[:success] = "Category Updated"
       redirect_to categories_path
     else
-      flash[:error] = "Failed to Update Category"
+      flash[:error] = @category.errors.full_messages.first
       render :edit
     end
   end
@@ -41,10 +41,10 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     if @category.destroy
-      flash[:success] = "category Deleted"
+      flash[:success] = "Category Deleted"
       redirect_to categories_path
     else
-      flash[:error] = "Failed to Delete Category"
+      flash[:error] = @category.errors.full_messages.first
       render :edit
     end
   end

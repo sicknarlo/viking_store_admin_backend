@@ -12,9 +12,8 @@
 <%= render partial: 'shared/navbar' %>
 <hr><br>
 <div class="container">
-  <%= flash[:success] %>
-  <%= flash[:error] %>
-  <%= flash[:notice] %>
+  <%= flash_messages %>
+
   <%= yield %>
 
 </div>

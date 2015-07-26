@@ -1,0 +1,42 @@
+<%= form_for @product do |f| %>
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <% if @product.id.nil? %>
+      <h4>ID: N/A</h4>
+    <% else %>
+      <h4>ID: <%= @product.id %></h4>
+    <% end %>
+  <% end -%>
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <%= f.label "Product Name" %>
+    <%= f.text_field :name, class: "form-control" %>
+  <% end -%>
+
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <%= f.label "Price" %>
+    <%= f.text_field :price, class: "form-control" %>
+  <% end -%>
+
+  <%= content_tag :div, class: "form-group" do -%>
+  <%= f.label "Category" %><br>
+  <%= f.collection_select :category_id,
+                          Category.all,
+                          :id,
+                          :name
+                           %>
+  <% end -%>
+
+<!--   <input type = "hidden" name = "sku" value = "<%# (Faker::Code.ean).to_i %>"> -->
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <% if @product.id.nil? %>
+      <%= f.submit "Create new product", class: 'btn btn-lg btn-success' %>
+    <% else %>
+      <%= f.submit "Update product", class: 'btn btn-lg btn-success' %>
+    <% end %>
+
+  <% end -%>
+
+<% end -%>

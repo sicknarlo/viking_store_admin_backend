@@ -14,11 +14,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(whitelisted_params)
+    @product.sku = (Faker::Code.ean).to_i
     if @product.save
       flash[:success] = "New Product Created"
-      redirect_to @product
+      redirect_to products_path
     else
-      flash[:error] = "Failed to Create New Product"
+      flash[:error] = @product.errors.full_messages.first
       render :new
     end
   end
@@ -31,9 +32,9 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     if @product.update
       flash[:success] = "Product Updated"
-      redirect_to @product
+      redirect_to products_path
     else
-      flash[:error] = "Failed to Update Product"
+      flash[:error] = @product.errors.full_messages.first
       render :edit
     end
   end
@@ -44,7 +45,7 @@ class ProductsController < ApplicationController
       flash[:success] = "Product Deleted"
       redirect_to index
     else
-      flash[:error] = "Failed to Delete Product"
+      flash[:error] = @product.errors.full_messages.first
       render :edit
     end
   end
