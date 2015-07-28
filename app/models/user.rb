@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   has_many :order_contents, :through => :orders
   has_many :products, through: :order_contents
 
+  validates :first_name, :last_name, :email, :length => {:in => 1..64}  #, :message => "length must be between 1 and 64 characters"
+  validates :email, :format => {:with => /@/}  # :message => "must be valid"
+
+
   # Admin Portal methods
 
   def last_order_date

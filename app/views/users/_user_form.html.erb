@@ -1,0 +1,33 @@
+<%= form_for @user do |f| %>
+ 	<% @user.errors.full_messages.each do |e| %>
+ 	<%= e %> <br>
+ 	<% end %>
+
+ 	<h2> Demographic Infomration </h2>
+
+ 	<%= f.label :first_name %>
+ 	<%= f.text_field :first_name %>
+
+ 	<%= f.label :last_name %>
+ 	<%= f.text_field :last_name%>
+
+ 	<%= f.label :email %>
+ 	<%= f.text_field :email %>
+
+ 	<% if @user.persisted? %> 
+
+	 	<%= f.label :default_billing_address %>
+	 	<%= %>
+
+	 	<%= f.label :default_shipping_address %>
+	 	<%= %>
+
+	 	<%= link_to "View Saved Addresses", '#' %>
+
+	 	<%= f.submit "Update #{@user.full_name}"%>
+
+ 	<% else %>
+ 			<%= f.submit "Create New User"%>
+ 	<% end %>
+
+<% end %>
