@@ -1,0 +1,18 @@
+<%= render partial: 'shared/admin_nav' %>
+
+  <div class = "col-sm-9 text-center">
+
+    <h2><strong><%= @product.name  %></strong> (<%= @product.category %>)</h2>
+    <h5><%= link_to 'Edit', edit_product_path %> | <%= link_to 'Delete', @product, method: :delete %> </h5>
+    <p><%= @product.description %></p>
+    <hr>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <h3>Ordered: <%= @product.order_count %></h3>
+        <h3>In Carts: <%= @product.cart_count %></h3>
+      </div>
+    </div>
+
+
+</div>

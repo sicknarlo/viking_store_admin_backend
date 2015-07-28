@@ -17,4 +17,32 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def order_count
+
+  end
+
+  def cart_count
+    Product.select("COUNT(quantity) AS q_count")
+            .joins("JOIN order_contents ON products.id=order_contents.product_id")
+            .group("products.id")
+            .having("products.id = ?", id)
+            .first[:q_count]
+  end
+
+  def order_count
+    Product.select("COUNT(quantity) AS q_count")
+            .joins("JOIN order_contents ON products.id=order_contents.product_id")
+            .group("products.id")
+            .having("checkout_date IS NOT NULL AND products.id = ?", id)
+            .first[:q_count]
+  end
+
+  def category
+    Product.select("categories.name")
+            .joins("JOIN categories ON products.category_id=categories.id")
+            .where("products.id = ?", id)
+            .first[:name]
+  end
+
+
 end

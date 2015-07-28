@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   # root to: 'dashboard#index'
-  get '/admin' => 'static_pages#admin'
   resources :dashboard, only: :index
 
   resources :users
