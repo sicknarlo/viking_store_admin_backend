@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
-  
+  belongs_to :category
   has_many :order_contents
+  has_many :orders, through: :order_contents
 
   validates :name,
             :presence => {:message => "is required"},
