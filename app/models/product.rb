@@ -1,25 +1,24 @@
 class Product < ActiveRecord::Base
 
   validates :name,
-            :presence => {:message => "Name is required"},
+            :presence => {:message => "is required"},
             :uniqueness => {:message => "Product already exists"},
             :length => {:in => 4..40,
                         :message => "Product must be within 4 and 40 characters"}
 
   validates :price,
-            :presence => {:message => "Price is required"},
-            # :check_price? => {:message => "Price must be less than $10,000"}
-            :numericality => { greater_than: 10000 }
+            :presence => {:message => "is required"},
+            :numericality => { less_than_or_equal_to: 10000, :message => "must be less than $10,000" }
 
+  # def check_price
+  #    if price > 10000
+  #     errors.add(:price, "must be less than $10,000")
+  #    end
+  # end
 
-
-  def check_price?
-    format_price(input_price) < 10000
-  end
-
-  def format_price(input)
-    price = input.gsub("$", "").strip.to_d
-  end
+  # def format_price(input)
+  #   price = input.gsub("$", "").strip.to_d
+  # end
 
   def self.in_last(days=nil)
     if days.nil?
