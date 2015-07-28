@@ -32,16 +32,18 @@ class Product < ActiveRecord::Base
   end
 
   def cart_count
-    Product.select("COUNT(quantity) AS q_count")
-            .joins("JOIN order_contents ON products.id=order_contents.product_id")
-            .group("products.id")
-            .having("products.id = ?", id)
-            .first[:q_count]
+    self.orders.count
+    # Product.select("COUNT(quantity) AS q_count")
+    #         .joins("JOIN order_contents ON products.id=order_contents.product_id")
+    #         .group("products.id")
+    #         .having("products.id = ?", id)
+    #         .first[:q_count]
   end
 
   def order_count
-    p = Product.select("COUNT(quantity)").joins("JOIN order_contents ON products.id=order_contents.product_id").joins("JOIN orders ON order_contents.order_id = orders.id").where("orders.checkout_date IS NOT NULL AND products.id = ?", id).group("products.id")
-    return p.first.count
+    self.orders.where("checkout_date IS NOT NULL").count
+    # p = Product.select("COUNT(quantity)").joins("JOIN order_contents ON products.id=order_contents.product_id").joins("JOIN orders ON order_contents.order_id = orders.id").where("orders.checkout_date IS NOT NULL AND products.id = ?", id).group("products.id")
+    # return p.first.count
   end
 
   def category
