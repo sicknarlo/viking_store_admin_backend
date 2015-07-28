@@ -1,5 +1,9 @@
 class Order < ActiveRecord::Base
 
+  belongs_to :user
+  has_many :order_contents
+  has_many :products, through: :order_contents
+
   def self.time_series_day(days=7)
 
     self.select("date_trunc('day', orders.checkout_date) AS day, count(DISTINCT orders.id), SUM(order_contents.quantity * products.price)").
