@@ -7,7 +7,7 @@ class Address < ActiveRecord::Base
   has_many :shipping_users, class_name: "User", foreign_key: :shipping_id
 
   def full_address
-    "#{self.street_address}, #{self.city.name}, #{self.state.name} #{self.zip_code.to_s}"
+    "#{self.street_address}, #{self.city.name}, #{self.state.name} #{self.zip_code}"
   end
 
 end

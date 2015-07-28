@@ -1,8 +1,8 @@
 class CreditCardsController < ApplicationController
 
-  def show
-    @credit_card = CreditCard.find(params[:id])
-  end
+  # def show
+  #   @credit_card = CreditCard.find(params[:id])
+  # end
 
   def destroy
     session[:return_to] ||= request.referer
