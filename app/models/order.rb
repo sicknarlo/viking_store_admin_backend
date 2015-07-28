@@ -5,6 +5,15 @@ class Order < ActiveRecord::Base
   has_many :products, through: :order_contents
   has_many :categories, through: :products
 
+  def user_order_value
+    self.order_contents.select(quantity*price)
+
+    self.order_contents.
+    self.products  #all the products
+    Order.first.products.select(:id, :price)
+  end
+
+
   def self.time_series_day(days=7)
 
     self.select("date_trunc('day', orders.checkout_date) AS day, count(DISTINCT orders.id), SUM(order_contents.quantity * products.price)").
