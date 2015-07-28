@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   # Admin Portal methods
 
-  def last_order
+  def last_order_date
     query = User.select("orders.checkout_date AS checkout")
                 .join_to_orders
                 .where("orders.checkout_date IS NOT NULL AND users.id = ?", id)

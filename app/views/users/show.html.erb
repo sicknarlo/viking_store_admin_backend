@@ -1,1 +1,16 @@
-Coming soon...
+<%= render partial: 'shared/admin_nav' %>
+
+<div class = "col-sm-9 text-center">
+<h1><%= User "#{@user.id}: #{@user.full_name}" %><h1>
+<div>
+<h2>Demographic Information</h2>
+<p> First Name: <%= @user.first_name %></p>
+<p> Last Name: <%= @user.last_name %></p>
+<p> Email: <%= @user.email %></p>
+<p> Default Billing Address: <%= @user.default_billing_address %></p>
+
+</div>
+
+<%= %>
+<%= %>
+</div>
