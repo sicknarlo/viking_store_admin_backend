@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update
+    if @user.update(whitelisted_params)
       flash[:success] = "User Updated"
       redirect_to @user
     else
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.destroy
       flash[:success] = "User Deleted"
-      redirect_to index
+      redirect_to users_path
     else
       flash[:error] = "Failed to Delete User"
       render :edit
@@ -52,6 +52,6 @@ class UsersController < ApplicationController
   private
 
   def whitelisted_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id)
   end
 end

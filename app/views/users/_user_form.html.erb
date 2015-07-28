@@ -14,13 +14,19 @@
  	<%= f.label :email %>
  	<%= f.text_field :email %>
 
- 	<% if @user.persisted? %> 
+ 	<% if @user.persisted? %>
 
 	 	<%= f.label :default_billing_address %>
-	 	<%= %>
+	 	<%= f.collection_select :billing_id,
+                          @user.addresses,
+                          :id,
+                          :full_address %>
 
 	 	<%= f.label :default_shipping_address %>
-	 	<%= %>
+	 	<%= f.collection_select :shipping_id,
+                          @user.addresses,
+                          :id,
+                          :full_address %>
 
 	 	<%= link_to "View Saved Addresses", '#' %>
 
