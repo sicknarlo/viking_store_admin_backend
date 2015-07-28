@@ -10,7 +10,7 @@
         <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
               content_tag(:strong, 'Create New Category!')
         end %>
-      <% end -%>
+      <% end %>
     </div>
   </div>
 
@@ -35,8 +35,8 @@
               <td> <%= link_to 'Show', category %> </td>
               <td> <%= link_to 'Edit', edit_category_path(category) %> </td>
               <td> <%= link_to 'Delete', category_path(category),
-                        method: :delete, 
-                        class: "alert-danger", 
+                        method: :delete,
+                        class: "alert-danger",
                         data: { confirm: "Are you sure?" } %> </td>
             </tr>
           <% end %>
