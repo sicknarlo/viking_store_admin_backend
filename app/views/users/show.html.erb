@@ -25,7 +25,7 @@
     <% @user.credit_cards.each do |cc| %>
       <p> Number: <%= cc.card_number %></p>
       <p> Expiration: <%= "#{cc.exp_year}-#{cc.exp_month}" %></p>
-      <%= link_to "Remove Card", '#' %><br>
+      <%= link_to "Remove Card", user_credit_card_path(@user.id, cc.id) , method: :delete%><br>
     <% end %>
 
   </div>
@@ -68,18 +68,15 @@
             <th>Edit</th>
             <th>Delete</th>
           </tr>
-          <% @user.orders.each do |ord| %>
+          <% @user.orders.each do |order| %>
             <tr>
               <td> <%= order.id %> </td>
               <td> <%= order.updated_at %> </td>
               <td> <%= order.value %> </td>
-              <td> <%= order.default_billing_address.city.name %> </td>
-              <td> <%= order.default_billing_address.state.name %> </td>
-              <td> <%= link_to order.total_orders %> </td>    <!-- ADD LINK -->
-              <td> <%= order.last_order_date %> </td>
-              <td> <%= link_to 'Show', order %> </td>
-              <td> <%= link_to 'Edit', edit_order_path(order) %> </td>
-              <td> <%= link_to 'Delete', order_path(order),
+              <td> <span class="order-status"><%= order.status %> </span></td>
+              <td> <%= link_to 'Show', 'order' %> </td>
+              <td> <%= link_to 'Edit', 'edit_order_path(order)' %> </td>
+              <td> <%= link_to 'Delete', 'order_path(order)',
                         method: :delete,
                         class: "alert-danger",
                         data: { confirm: "Are you sure?" } %> </td>

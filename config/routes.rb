@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # root to: 'dashboard#index'
   resources :dashboard, only: :index
 
-  resources :users
+  resources :users do
+    resources :credit_cards
+  end
   resources :categories
   resources :products
   # The priority is based upon order of creation: first created -> highest priority.

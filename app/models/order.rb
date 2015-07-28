@@ -5,12 +5,12 @@ class Order < ActiveRecord::Base
   has_many :products, through: :order_contents
   has_many :categories, through: :products
 
-  def user_order_value
-    self.order_contents.select(quantity*price)
+  def value
+    products.sum("quantity * price")
+  end
 
-    self.order_contents.
-    self.products  #all the products
-    Order.first.products.select(:id, :price)
+  def status
+    checkout_date ? "PLACED" : 'UNPLACED'
   end
 
 
