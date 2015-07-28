@@ -10,7 +10,7 @@
         <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
               content_tag(:strong, 'Create New User!')
         end %>
-      <% end -%>
+      <% end %>
     </div>
   </div>
 
@@ -39,12 +39,12 @@
               <td> <%= user.default_billing_address.city.name %> </td>
               <td> <%= user.default_billing_address.state.name %> </td>
               <td> <%= link_to user.total_orders %> </td>    <!-- ADD LINK -->
-              <td> <%= user.last_order_date %> </td> 
+              <td> <%= user.last_order_date %> </td>
               <td> <%= link_to 'Show', user %> </td>
               <td> <%= link_to 'Edit', edit_user_path(user) %> </td>
               <td> <%= link_to 'Delete', user_path(user),
-                        method: :delete, 
-                        class: "alert-danger", 
+                        method: :delete,
+                        class: "alert-danger",
                         data: { confirm: "Are you sure?" } %> </td>
             </tr>
           <% end %>

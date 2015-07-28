@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
             :length => {:in => 4..16,
                         :message => "Name must be within 4 and 16 characters"}
 
-  def products
+  def product_list
     self.products
     # Category.find_by_sql("SELECT products.id, products.name FROM categories
     #                       JOIN products ON categories.id=products.category_id
