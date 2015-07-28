@@ -1,5 +1,12 @@
 class User < ActiveRecord::Base
 
+  has_many :addresses
+  belongs_to :default_billing_address, class_name: "Address", foreign_key: :billing_id
+  belongs_to :default_shipping_address, class_name: "Address", foreign_key: :shipping_id
+
+  has_many :orders
+  has_many :credit_cards
+
   # Admin Portal methods
 
   def last_order

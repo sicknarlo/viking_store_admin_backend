@@ -44,7 +44,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     if @product.destroy
       flash[:success] = "Product Deleted"
-      redirect_to index
+      redirect_to products_path
     else
       flash[:error] = @product.errors.full_messages.first
       render :edit
