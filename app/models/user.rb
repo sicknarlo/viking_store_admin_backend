@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   before_destroy :empty_cart
 
+
   # Admin Portal methods
   def empty_cart
     orders.where("checkout_date IS NULL").each do |cart|
