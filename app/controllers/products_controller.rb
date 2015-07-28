@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(whitelisted_params)
+    @product.price = params[:product][:price].gsub("$","").strip.to_f
     @product.sku = (Faker::Code.ean).to_i
     if @product.save
       flash[:success] = "New Product Created"
@@ -30,7 +31,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @product.update
+    if @product.update(whitelisted_params)
       flash[:success] = "Product Updated"
       redirect_to products_path
     else
