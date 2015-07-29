@@ -12,11 +12,11 @@
 	 	<%= f.label :street_address %>
 	 	<%= f.text_field :street_address %>
 
-	 	<%= f.label :input_city %>
-	 	<%= f.text_field :input_city %>
+	 	<%= f.label :secondary_address %>
+	 	<%= f.text_field :secondary_address %>
 
-	 	<%= f.label :input_city %>
-	 	<%= f.text_field :input_city %>
+	 	<%= f.label "city" %>
+	 	<%= f.text_field "city" %>
 
 	 	<%= f.label :state_id %>
 		<%= f.collection_select :state_id,
@@ -28,4 +28,4 @@
 	 	<%= f.text_field :zip_code %>
 
 	 	<%= f.submit "Create New Address"%>
-<% end %> 
+<% end %>

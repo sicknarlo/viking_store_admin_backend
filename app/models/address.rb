@@ -8,14 +8,24 @@ class Address < ActiveRecord::Base
 
   validates :street_address, :city, :state, :presence => true
   validates :street_address, :city, :length => {:maximum => 64}
-  validates :user_id, :if => :check_valid_user
+  validates :user, :presence => true
+
+  before_create :check_city
 
   def full_address
     "#{self.street_address}, #{self.city.name}, #{self.state.name} #{self.zip_code}"
   end
 
-  def check_valid_user
-  	User.find(:user_id)
+  def check_city
+  	params["city"]
+    result = City.select(:id).where("name = ?", params["city"])
+    if result.first
+      result= result.first.id
+    else
+      c = City.new(name: params["city"])
+      c.save
+      c.id
+    end
   end
 
 end
