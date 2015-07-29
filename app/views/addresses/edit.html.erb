@@ -1,0 +1,5 @@
+<h2> Edit <%= @address.user.full_name %>'s Address </h2>
+
+<%= render :partial => 'address_form' %>
+
+<%= link_to "Delete Address", address_path(@address.id), method: :delete, data: { confirm: "Are you sure?" } %>
