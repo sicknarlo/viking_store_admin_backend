@@ -1,0 +1,53 @@
+<%= render partial: 'shared/admin_nav' %>
+
+<div class = "col-sm-9 text-center">
+
+  <h2>Viking Store All Orders</h2>
+
+  <div class = "row">
+    <div class = "col-sm-12 text-center">
+      <h4><em>Create new orders from within <%= link_to "User", users_path %> profiles.</em></h4>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <table class="table table-hover table-striped">
+          <tr>
+            <th>ID</th>
+            <th>UserID</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Total Value</th>
+            <th>Status</th>
+            <th>Date Placed</th>
+            <th>Show</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          <% @orders.each do |order| %>
+            <tr>
+              <td> <%= order.id %> </td>
+              <td> <%= link_to order.user.id, orders_path(:user_id => order.user.id) %> </td>
+              <td> <%= order.user.default_shipping_address.street_address %> </td>
+              <td> <%= order.user.default_shipping_address.city.name %> </td>
+              <td> <%= order.user.default_shipping_address.state.name %> </td>
+              <td> <%= order.value %> </td>
+              <td> <%= order.status %> </td>
+              <td> <%= order.checkout_date.strftime("%Y-%m-%d") unless order.checkout_date.nil? %> </td>
+              <td> <%= link_to 'Show', order %> </td>
+              <td> <%= link_to 'Edit', edit_product_path(order) %> </td>
+              <td> <%= link_to 'Delete', product_path(order),
+                        method: :delete, 
+                        class: "alert-danger", 
+                        data: { confirm: "Are you sure?" } %> </td>
+            </tr>
+          <% end %>
+
+      </table>
+    </div>
+  </div>
+</div>
