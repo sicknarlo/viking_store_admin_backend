@@ -18,12 +18,8 @@
 
     <%= link_to "Edit #{@user.full_name}'s Information", edit_user_path(@user.id) %>
     <%= link_to "Delete #{@user.full_name}", user_path(@user.id), method: :delete, data: {confirm: "Do you really want to delete this user?"} %>
-<<<<<<< HEAD
-    <%= link_to "View Saved Addressses", addresses_path(:user_id => @user.id) %>
-=======
     <%= link_to "View Saved Addressses",
           addresses_path(:user_id => @user.id) %>
->>>>>>> ce12cf6107a71c7aff9bcd23074c5b1bc99e3efe
     <%= link_to "View Unplaced Order (Cart)", '#'%>
   </div>
 
@@ -54,11 +50,7 @@
       </div>
       <br>
       <div class= "row">
-        <%= link_to '#' do %>
-          <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
-                content_tag(:strong, 'Create Address')
-          end %>
-        <% end %>
+        <%= link_to 'Create Address', new_address_path(:user_id => @user.id), type: 'button', class: 'btn btn-lg btn-primary' %>
       </div>
     </div>
   </div>

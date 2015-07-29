@@ -15,8 +15,8 @@
 	 	<%= f.label :secondary_address %>
 	 	<%= f.text_field :secondary_address %>
 
-	 	<%= f.label "city" %>
-	 	<%= f.text_field "city" %>
+	 	<%= f.label :city %>
+	 	<%= f.text_field :city %>
 
 	 	<%= f.label :state_id %>
 		<%= f.collection_select :state_id,
@@ -26,6 +26,8 @@
 
 	  <%= f.label :zip_code %>
 	 	<%= f.text_field :zip_code %>
+
+	 	<%= f.hidden_field :user_id, value: "#{@address.user.id}" %>
 
 	 	<%= f.submit "Create New Address"%>
 <% end %>
