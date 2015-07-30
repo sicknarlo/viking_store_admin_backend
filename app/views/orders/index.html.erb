@@ -32,9 +32,9 @@
             <tr>
               <td> <%= order.id %> </td>
               <td> <%= link_to order.user.id, orders_path(:user_id => order.user.id) %> </td>
-              <td> <%= order.user.default_shipping_address.street_address %> </td>
-              <td> <%= order.user.default_shipping_address.city.name %> </td>
-              <td> <%= order.user.default_shipping_address.state.name %> </td>
+              <td> <%= order.user.default_shipping_address.street_address unless order.user.default_shipping_address.nil? %> </td>
+              <td> <%= order.user.default_shipping_address.city.name unless order.user.default_shipping_address.nil? %> </td>
+              <td> <%= order.user.default_shipping_address.state.name unless order.user.default_shipping_address.nil? %> </td>
               <td> <%= order.value %> </td>
               <td> <%= order.status %> </td>
               <td> <%= order.checkout_date.strftime("%Y-%m-%d") unless order.checkout_date.nil? %> </td>

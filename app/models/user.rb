@@ -14,6 +14,13 @@ class User < ActiveRecord::Base
 
   before_destroy :empty_cart
 
+  # after_destroy :destroy_unused_addresses
+
+  # def destroy_unused_addresses
+  #   self.addresses.each do |add|
+  #     add.destroy if self.add.check_order_affliation
+  #   end
+  # end
 
   # Admin Portal methods
   def empty_cart
