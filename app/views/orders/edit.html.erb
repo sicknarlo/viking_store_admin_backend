@@ -66,22 +66,28 @@
     </h2>
     <table class="table table-striped">
       <tr>
-        <th>ProductID</th>
-        <th>Product</th>
+        <th>ID</th>
         <th>Quantity</th>
         <th>Price</th>
         <th>Total Price</th>
+        <th>REMOVE</th>
       </tr>
-      <%= form_for @order_contents do |f| %>
-        <% OrderContent.where(:order_id => @order.id).each do |o| %>
+        
+      <%= form_for @order do |f| %>
+        <%= f.fields_for :order_contents do |order_fields| %>
           <tr>
-            <td><%= o.product_id %></td>
-            <td><%= f.text_field :quantity %></td>
-            <td>$<%= o.product.price %></td>
-            <td>$<%= o.quantity * o.product.price %></td>
-          </tr></tr>
-        <% end %>
+            <td><%= order_fields.object.id %></td>
+            <td><%= order_fields.text_field :quantity %></td>
+            <td><%= order_fields.object.product.price %></td>
+            <td><%= order_fields.object.product.price * order_fields.object.quantity %></td>
+            <!-- <input type = "hidden" name="order[order_contents_attributes][#i" value="" -->
+            <%= order_fields.hidden_field :product_id %>
+          </tr>
+
+        <% end  %>
+         <%= f.submit %>
       <% end %>
+
     </table>
     <%= link_to "Edit Order", edit_order_path(@order) %>
     <br>
@@ -99,13 +105,16 @@
         <th>Quantity</th>
       </tr>
 
-      <%= form_for @order_contents do |f| %>
-        <% OrderContent.where(:order_id => @order.id).each do |o| %>
+      <%= form_for @order do |f| %>
+        <%= f.fields_for :order_contents do |order_fields| %>
           <tr>
-            <td><%= f.text_field :product_id %></td>
-            <td><%= f.text_field :quantity %></td>
-          </tr></tr>
-        <% end %>
+            <td><%= order_fields.text_field :product_id %></td>
+            <td><%= order_fields.text_field :quantity %></td>
+            
+          </tr>
+
+        <% end  %>
+         <%= f.submit %>
       <% end %>
     </table>
   </div>
