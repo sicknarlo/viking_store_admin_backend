@@ -2,11 +2,18 @@
 
 <div class = "col-sm-9 text-center">
 
-  <h2>Viking Store All Orders</h2>
+  <h2><%= @title %></h2>
 
   <div class = "row">
     <div class = "col-sm-12 text-center">
-      <h4><em>Create new orders from within <%= link_to "User", users_path %> profiles.</em></h4>
+      <% if @show_all %>
+        <h4><em>Create new orders from within <%= link_to "User", users_path %> profiles.</em></h4>
+      <% else %>
+        <%= link_to new_order_path(:user_id => @user.id) do %>
+          <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+                content_tag(:strong, 'Create New Order!') end %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 
@@ -31,7 +38,7 @@
           <% @orders.each do |order| %>
             <tr>
               <td> <%= order.id %> </td>
-              <td> <%= link_to order.user.id, orders_path(:user_id => order.user.id) %> </td>
+              <td> <%= link_to order.user.id, user_path(order.user.id) %> </td>
               <td> <%= order.user.default_shipping_address.street_address unless order.user.default_shipping_address.nil? %> </td>
               <td> <%= order.user.default_shipping_address.city.name unless order.user.default_shipping_address.nil? %> </td>
               <td> <%= order.user.default_shipping_address.state.name unless order.user.default_shipping_address.nil? %> </td>
@@ -41,8 +48,8 @@
               <td> <%= link_to 'Show', order %> </td>
               <td> <%= link_to 'Edit', edit_product_path(order) %> </td>
               <td> <%= link_to 'Delete', product_path(order),
-                        method: :delete, 
-                        class: "alert-danger", 
+                        method: :delete,
+                        class: "alert-danger",
                         data: { confirm: "Are you sure?" } %> </td>
             </tr>
           <% end %>

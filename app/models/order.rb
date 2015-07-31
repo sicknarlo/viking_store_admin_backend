@@ -4,13 +4,15 @@ class Order < ActiveRecord::Base
   has_many :order_contents, dependent: :destroy
   has_many :products, through: :order_contents
   has_many :categories, through: :products
+  belongs_to :shipping_address, class_name: "Address", foreign_key: :shipping_id
+  belongs_to :billing_address, class_name: "Address", foreign_key: :billing_id
 
   def value
     products.sum("quantity * price")
   end
 
   def status
-    checkout_date ? "PLACED" : 'UNPLACED'
+    checkout_date ? "PLACED" : "UNPLACED"
   end
 
   def self.time_series_day(days=7)

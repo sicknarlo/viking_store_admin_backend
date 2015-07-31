@@ -36,14 +36,14 @@
               <td> <%= user.id %> </td>
               <td> <%= user.full_name %> </td>
               <td> <%= user.created_at %> </td>
-              <% if user.default_billing_address %> 
+              <% if user.default_billing_address %>
                 <td> <%= user.default_billing_address.city.name %> </td>
                 <td> <%= user.default_billing_address.state.name %> </td>
               <% else %>
                 <td> blank </td>
                 <td> blank </td>
               <% end %>
-              <td> <%= link_to user.total_orders %> </td>    <!-- ADD LINK -->
+              <td> <%= link_to user.total_orders, orders_path(:user_id => user.id) %> </td>    <!-- ADD LINK -->
               <td> <%= user.last_order_date %> </td>
               <td> <%= link_to 'Show', user %> </td>
               <td> <%= link_to 'Edit', edit_user_path(user) %> </td>
