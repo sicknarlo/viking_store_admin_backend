@@ -7,7 +7,9 @@ class Order < ActiveRecord::Base
   belongs_to :shipping_address, class_name: "Address", foreign_key: :shipping_id
   belongs_to :billing_address, class_name: "Address", foreign_key: :billing_id
 
-  accepts_nested_attributes_for :order_contents
+  accepts_nested_attributes_for :order_contents,
+                                :reject_if => :all_blank,
+                                :allow_destroy => :true
 
   def value
     products.sum("quantity * price")

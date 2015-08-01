@@ -1,0 +1,47 @@
+<%= form_for [:admin, @address] do |f| %>
+
+ 	<% @address.errors.full_messages.each do |e| %>
+ 	<%= e %> <br>
+ 	<% end %>
+
+	<p>Owner ID: <%= @address.user.id %> </p>
+	<p>Owner name: <%= link_to "#{@address.user.full_name} (click to view user)", admin_user_path(@address.user.id) %></p>
+	<p>
+	 	<%= f.label :street_address %>
+	 	<%= f.text_field :street_address %>
+	</p>
+	<p>
+	 	<%= f.label :secondary_address %>
+	 	<%= f.text_field :secondary_address %>
+	</p>
+	<p>
+	 	<%= f.label :city %>
+	  	<% if @address.persisted? %>
+	  		<%= f.text_field :city, value: @address.city.name %>
+  		<% else %>
+				<%= f.text_field :city %>
+			<%end%>
+	</p>
+	<p>
+	 	<%= f.label :state_id %>
+		<%= f.collection_select :state_id,
+	                          @states,
+	                          :id,
+	                          :name %>
+	</p>
+	<p>
+	  <%= f.label :zip_code %>
+	 	<%= f.text_field :zip_code %>
+	</p>
+	 	<%= f.hidden_field :user_id, value: "#{@address.user.id}" %>
+
+  <% if @address.persisted? %>
+  <p>
+	 	<%= f.submit "Update Address"%>
+	</p>
+  <% else %>
+  <p>
+	 	<%= f.submit "Create New Address"%>
+	</p>
+	<% end %>
+<% end %>

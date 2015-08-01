@@ -1,0 +1,33 @@
+<%= render partial: 'shared/admin_nav' %>
+
+  <div class = "col-sm-9 text-center">
+
+    <h2><strong>Category <%= @category.id %>: <%= @category.name %></strong></h2>
+    <h5><%= link_to 'Edit', edit_admin_category_path %> | <%= link_to 'Delete', [:admin, @category], method: :delete %> </h5>
+    <p><%= @category.description %></p>
+    <hr>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <table class="table table-hover table-striped">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th></th>
+            </tr>
+            <% @category.product_list.each do |product| %>
+              <tr>
+                <td> <%= product.id %> </td>
+                <td> <%= product.name %> </td>
+                <td> <%= link_to 'Show', [:admin, product] %> </td>
+              </tr>
+            <% end %>
+
+        </table>
+      </div>
+    </div>
+
+
+</div>
+
+

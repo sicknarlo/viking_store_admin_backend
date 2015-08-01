@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
   # root to: 'dashboard#index'
-  resources :dashboard, only: :index
 
-  resources :users do
-    resources :credit_cards
-  end
-  resources :categories
-  resources :products
-  resources :addresses
-  resources :orders do
-    resources :order_contents
+  namespace :admin do
+    resources :dashboard, only: :index
+    resources :users do
+      resources :credit_cards
+    end
+    resources :categories
+    resources :products
+    resources :addresses
+    resources :orders do
+      resources :order_contents
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

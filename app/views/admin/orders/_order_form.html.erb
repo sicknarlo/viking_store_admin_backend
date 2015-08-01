@@ -1,0 +1,53 @@
+<div class="col-sm-12 panel panel-default">
+  <div class="panel-body">
+    <h2 class='text-center'>
+      Logistical Information
+    </h2>
+    <h3>
+    Basic Information
+    </h3>
+    <table class="table">
+      <tr>
+        <td>Customer ID:</td>
+        <td><%= @user.id %></td>
+      </tr>
+      <tr>
+        <td>Customer</td>
+        <td><%= link_to @user.full_name, admin_user_path(@user) %></td>
+      </tr>
+      <tr>
+        <td>E-mail</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>Date Placed</td>
+        <td>N/A</td>
+      </tr>
+    </table>
+    <%= link_to "Edit Customer Profile", edit_admin_user_path(@user) %>
+    <%= form_for [:admin, @order] do |f| %>
+      <h3>
+        Shipping Address
+      </h3>
+      <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, :html => {class: 'form-control'}%>
+      <h3>
+        Billing Address
+      </h3>
+      <%= f.collection_select :billing_id, @user.addresses, :id, :street_address, :html => {class: 'form-control'}%>
+      <h3>
+        Billing Card
+      </h3>
+      <select name="empty" id="cards">
+        <%= @user.credit_cards.each do |card| %>
+          <option>
+            <%= card.card_number %>
+          </option>
+        <% end %>
+      </select>
+      <br>
+      <br>
+      <%= f.hidden_field :user_id %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

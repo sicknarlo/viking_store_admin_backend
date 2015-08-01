@@ -49,8 +49,8 @@ class User < ActiveRecord::Base
          .count
   end
 
-  def full_name
-    "#{self.first_name} #{self.last_name}"
+  def full_namez
+    self.first_name + " " + self.last_name
   end
 
   def find_state_name
@@ -144,8 +144,15 @@ class User < ActiveRecord::Base
       group('orders.id, full_name').order('cost DESC').limit(1)
     end
 
+    # def self.high_single_order_value
+    # self.select("users.id, SUM(products.price * order_contents.quantity) as cost")
+    #     .join_to_products
+    #     .where("orders.checkout_date IS NOT NULL")
+    #     .group('orders.id, users.id').order('cost DESC').limit(1)
+    # end
+
     def self.high_lifetime_value
-      self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity) as cost').
+      self.select('users.first_name AS fname, users.last_name AS , SUM(products.price * order_contents.quantity) as cost').
       join_to_products.
       where("orders.checkout_date IS NOT NULL").
       group('users.id, full_name').order('cost DESC').limit(1)

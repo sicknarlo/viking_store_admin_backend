@@ -1,0 +1,17 @@
+<%= render partial: 'shared/admin_nav' %>
+
+<div class = "col-sm-9 text-center">
+
+  <h2>Edit product</h2>
+  <%= link_to "Delete", admin_product_path(@product), method: :delete, data: {confirm: "Are you sure?"} %>
+  <hr>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+
+      <%= render partial: 'product_form' %>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,62 @@
+<%= render partial: 'shared/admin_nav' %>
+
+<div class = "col-sm-9">
+  <h1>User <%= "#{@user.id}: #{@user.full_name}" %></h1>
+  <div class = "row">
+    <h2>Demographic Information</h2>
+    <p> First Name: <%= @user.first_name %></p>
+    <p> Last Name: <%= @user.last_name %></p>
+    <p> Email: <%= @user.email %></p>
+
+    <p> Default Billing Address:
+      <%= display_address("billing", @user) %>
+    </p>
+
+    <p> Default Shipping Address:
+      <%= display_address("shipping", @user) %>
+    </p>
+
+    <%= link_to "Edit #{@user.full_name}'s Information", edit_admin_user_path(@user.id) %>
+    <%= link_to "Delete #{@user.full_name}", admin_user_path(@user.id), method: :delete, data: {confirm: "Do you really want to delete this user?"} %>
+    <%= link_to "View Saved Addressses",
+          addresses_path(:user_id => @user.id) %>
+    <%= link_to "View Unplaced Order (Cart)", '#'%>
+  </div>
+
+
+  <div class = "row">
+    <h3>Credit Card Infomration</h3>
+    <p> First Name: <%= @user.first_name %></p>
+    <p> Last Name: <%= @user.last_name %></p>
+
+    <% @user.credit_cards.each do |cc| %>
+      <p> Number: <%= cc.card_number %></p>
+      <p> Expiration: <%= "#{cc.exp_year}-#{cc.exp_month}" %></p>
+      <%= link_to "Remove Card", admin_user_credit_card_path(@user.id, cc.id) , method: :delete%><br>
+    <% end %>
+
+  </div>
+
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <h4>Admin Actions for <%= @user.full_name %></h4>
+      <div class= "row">
+        <%= link_to '#' do %>
+          <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+                content_tag(:strong, 'Create Order')
+          end %>
+        <% end %>
+      </div>
+      <br>
+      <div class= "row">
+        <%= link_to 'Create Address', admin_new_address_path(:user_id => @user.id), type: 'button', class: 'btn btn-lg btn-primary' %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="col-sm-12">
+  <%= render partial: "shared/user_order_history", :locals => {:user => @user} %>
+  </div>
+
+</div>

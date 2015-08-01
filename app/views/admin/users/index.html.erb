@@ -1,0 +1,60 @@
+<%= render partial: 'shared/admin_nav' %>
+
+<div class = "col-sm-9 text-center">
+
+  <h2>Viking Store Users</h2>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <%= link_to new_admin_user_path do %>
+        <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+              content_tag(:strong, 'Create New User!')
+        end %>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <table class="table table-hover table-striped">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Join Date</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Orders</th>
+            <th>Last order date</th>
+            <th>Show</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          <% @users.each do |user| %>
+            <tr>
+              <td> <%= user.id %> </td>
+              <td> <%= user.full_name %> </td>
+              <td> <%= user.created_at %> </td>
+              <% if user.default_billing_address %>
+                <td> <%= user.default_billing_address.city.name %> </td>
+                <td> <%= user.default_billing_address.state.name %> </td>
+              <% else %>
+                <td> blank </td>
+                <td> blank </td>
+              <% end %>
+              <td> <%= link_to user.total_orders, admin_orders_path(:user_id => user.id) %> </td>    <!-- ADD LINK -->
+              <td> <%= user.last_order_date %> </td>
+              <td> <%= link_to 'Show', [:admin, user] %> </td>
+              <td> <%= link_to 'Edit', edit_admin_user_path(user) %> </td>
+              <td> <%= link_to 'Delete', admin_user_path(user),
+                        method: :delete,
+                        class: "alert-danger",
+                        data: { confirm: "Are you sure?" } %> </td>
+            </tr>
+          <% end %>
+
+      </table>
+    </div>
+  </div>
+</div>
