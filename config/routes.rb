@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
+  get 'carts/show'
+
   # root to: 'dashboard#index'
 
+  root 'store#index'
+
+  resource :cart, only: [:show] do
+    put 'add/:product_id', to: 'carts#add', as: :add_to
+    put 'remove/:product_id', to: 'carts#remove', as: :remove_from
+  end
+
+  resource :session, :only => [:new, :create, :destroy]
+
+  resources :store
+  resources :products
+  resources :categories
   namespace :admin do
     resources :dashboard, only: :index
     resources :users do

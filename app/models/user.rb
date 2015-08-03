@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
          .count
   end
 
-  def full_namez
+  def full_name
     self.first_name + " " + self.last_name
   end
 

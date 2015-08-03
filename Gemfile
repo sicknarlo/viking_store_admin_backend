@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem "font-awesome-rails"
 gem 'rails'
 # Sqlite3 for database
 # gem 'sqlite3'

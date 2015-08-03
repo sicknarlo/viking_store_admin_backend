@@ -13,9 +13,35 @@
 <hr><br>
 <div class="container">
   <%= flash_messages %>
-
   <%= yield %>
-
 </div>
+
+<!-- Footer -->
+<footer>
+  <div class="row">
+      <div class="col-lg-12">
+          <h3>Viking Store</h3>
+          <p>Telephone: (555)-444-5321</p>
+          <p><%= link_to "Admin Portal", admin_dashboard_index_path %></p>
+          <p>Copyright &copy; Viking Store 2015</p>
+      </div>
+  </div>
+</footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
 </body>
 </html>
